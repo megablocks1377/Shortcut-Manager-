@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="shortcutmanager.ui.MainController"
+            styleClass="root-pane">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox styleClass="top-bar" spacing="12" alignment="CENTER_LEFT">
+            <padding><Insets top="12" right="20" bottom="12" left="20"/></padding>
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="⚡" styleClass="app-logo"/>
+                <Label text="ShortcutManager" styleClass="app-title"/>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label text="App:" styleClass="dropdown-label"/>
+            <ComboBox fx:id="appDropdown" prefWidth="200" styleClass="app-dropdown"
+                      promptText="Select an application..."/>
+
+                        <Separator orientation="VERTICAL" styleClass="top-separator"/>
+
+            <!-- Auto-detect controls -->
+            <ToggleButton fx:id="autoDetectToggle" text="⊙ Auto-detect"
+                          styleClass="btn-detect"/>
+            <Label fx:id="detectionStatusLabel" text="Manual mode"
+                   styleClass="detection-status"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="settingsBtn" text="⚙ Settings" styleClass="btn-icon"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <StackPane fx:id="contentPane">
+            <VBox spacing="0">
+
+            <!-- APP HEADER STRIP -->
+            <HBox styleClass="app-header-strip" spacing="12" alignment="CENTER_LEFT">
+                <padding><Insets top="14" right="24" bottom="14" left="24"/></padding>
+
+                <Label fx:id="appIconLabel" text="💻" styleClass="app-icon-large"/>
+                <VBox spacing="2">
+                    <Label fx:id="appNameLabel" text="Select an app" styleClass="current-app-name"/>
+                    <Label fx:id="shortcutCountLabel" text="0 shortcuts" styleClass="shortcut-count"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <TextField fx:id="searchField" prefWidth="240" styleClass="search-field"
+                           promptText="🔍  Search shortcuts..."/>
+
+                <Button fx:id="addShortcutBtn" text="+ Add Shortcut" styleClass="btn-primary"/>
+                <Button fx:id="deleteShortcutBtn" text="✕ Delete" styleClass="btn-danger"/>
+            </HBox>
+
+            <!-- CATEGORY TABS + TABLE -->
+            <TabPane fx:id="categoryTabs" VBox.vgrow="ALWAYS" styleClass="category-tabs"
+                     tabClosingPolicy="UNAVAILABLE">
+                <Tab text="All" closable="false">
+                    <TableView fx:id="allShortcutsTable" styleClass="shortcuts-table">
+                        <columns>
+                            <TableColumn fx:id="actionColumn"   text="Action"       prefWidth="320"/>
+                            <TableColumn fx:id="keysColumn"     text="Shortcut Keys" prefWidth="220"/>
+                            <TableColumn fx:id="categoryColumn" text="Category"      prefWidth="160"/>
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                    </TableView>
+                </Tab>
+            </TabPane>
+
+        </VBox>
+        </StackPane>
+    </center>
+
+    <!-- STATUS BAR -->
+    <bottom>
+        <HBox styleClass="status-bar" spacing="16" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="20" bottom="8" left="20"/></padding>
+            <Label text="Double-click a row to edit  •  Right-click for more options  •  Enable Auto-detect to follow the active window"
+                   styleClass="status-hint"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
